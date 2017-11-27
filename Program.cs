@@ -14,7 +14,9 @@ namespace AzureToolkit
     {
         public static void Main(string[] args)
         {
+            //test
             BuildWebHost(args).Run();
+            //asdasdasd
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
