@@ -6,4 +6,5 @@ export interface BingSearchResponse {
 export interface ImageResult {
     name: string;
     thumbnailUrl: string;
+    contentUrl: string;
 }

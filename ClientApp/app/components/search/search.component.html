@@ -3,14 +3,42 @@
         <p>Find images using Bing Image Cognitive Search.</p>
         <div class="form-group">
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="searchInput" #searchInput>
+                <input type="text" class="form-control" id="searchInput" (keyup.enter)="search(searchInput.value)" #searchInput>
             </div>
             <button type="submit" class="btn btn-default" (click)="search(searchInput.value)">Search</button>
         </div>
 </div>
+
+<div *ngIf="searchResults">
+    <h2><b>Selected Photo</b></h2>
+    <div class="currentItem card" *ngIf="currentAnalytics || isAnalyzing">
+        <img src="{{currentItem?.thumbnailUrl}}" #image/>
+        <div #faceRectangles></div>  
+        <div *ngIf="!isAnalyzing">
+            <h4><b>{{currentAnalytics?.description.captions[0].text}}</b></h4>
+            <div>
+                <span class="tag label" 
+                    [ngClass]="{'label-success': tag.confidence >= 75, 
+                                'label-warning': tag.confidence >=5 && tag.confidence < 75,
+                                'label-danger': tag.confidence < 5}"
+                    *ngFor="let tag of currentAnalytics?.tags">
+                    <span class="confidence">{{tag.confidence}}%</span>
+                    {{tag.name}}  
+                </span>
+            </div>
+        </div>
+        <div *ngIf="isAnalyzing">
+            <h4>Analyzing Photo</h4>
+        </div>
+    </div>
+    <h4 class="no-results" *ngIf="!currentAnalytics && !isAnalyzing">Select a photo to analyze it.</h4>
+</div>
+<br/>
+<br/>
+
     <h2><b>Search Results</b></h2>
     <div class="results" *ngIf="searchResults">
-        <div *ngFor="let result of searchResults" class="card">
+        <div *ngFor="let result of searchResults" (click)="analyze(result)" class="card">
             <img src="{{result?.thumbnailUrl}}" />
         </div>
     </div>
