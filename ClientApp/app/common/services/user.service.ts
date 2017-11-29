@@ -33,11 +33,14 @@ export class UserService {
                     this.aadUser.user_claims.forEach(claim => {
                         switch (claim.typ) {
                             case "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname":
-                                user.firstName = claim.val;
+                                user.givenname = claim.val;
                                 break;
                             case "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname":
-                                user.lastName = claim.val;
+                                user.surname = claim.val;
                                 break;
+                            case "jobTitle":
+                                user.jobTitle = claim.val;
+                                break;                                
                         }
                     });
    
