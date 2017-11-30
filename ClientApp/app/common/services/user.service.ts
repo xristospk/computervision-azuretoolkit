@@ -11,6 +11,13 @@ export class UserService {
     private originUrl: string;
     private aadUser: AADUser;
 
+    private devUser: User = {
+        givenname: "John",
+        surname: "Doe",
+        jobTitle: "B.Sc.",
+        userId: "1"
+    }
+
     constructor(private http: Http, @Inject('BASE_URL')originUrl: string) {
         this.originUrl = originUrl;
     }
@@ -21,7 +28,12 @@ export class UserService {
     }
 
     public getUser(): Observable<User> {
-        debugger;
+        if (this.originUrl.indexOf("localhost") > -1) {
+            return new Observable(observer => {
+                observer.next(this.devUser);
+                observer.complete();
+            });
+        }
         return this.http.get(`${this.originUrl}/.auth/me`)
             .map(response => {
                 try {

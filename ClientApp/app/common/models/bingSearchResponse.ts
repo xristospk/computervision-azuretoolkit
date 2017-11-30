@@ -7,4 +7,6 @@ export interface ImageResult {
     name: string;
     thumbnailUrl: string;
     contentUrl: string;
+    imageId: string;
+    encodingFormat: string;
 }

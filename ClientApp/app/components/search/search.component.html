@@ -26,6 +26,8 @@
                     {{tag.name}}  
                 </span>
             </div>
+            <button *ngIf="!currentItemSaved && !isSavingImage" (click)="saveImage()">Save image</button>
+            <span *ngIf="currentItemSaved">Image saved! :)</span>
         </div>
         <div *ngIf="isAnalyzing">
             <h4>Analyzing Photo</h4>

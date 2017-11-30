@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { CognitiveService } from '../../common/services/cognitive.service';
+import { AzureToolkitService } from '../../common/services/azureToolkit.service';
 import { ImageResult } from '../../common/models/bingSearchResponse';
 import { ComputerVisionRequest, ComputerVisionResponse, FaceResponse } from '../../common/models/computerVisionResponse';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Element } from '@angular/compiler';
+import { ImagePostRequest } from '../../common/models/imagePostRequest';
 
 @Component({
     selector: 'search',
@@ -18,11 +20,13 @@ export class SearchComponent {
     currentAnalytics: ComputerVisionResponse | null;
     currentItem: ImageResult | null;
     isAnalyzing: boolean = false;
+    currentItemSaved: boolean = false;
+    isSavingImage: boolean = false;
 
     @ViewChild('image') image: any;
     @ViewChild('faceRectangles') faceRectangles: any;
 
-    constructor(private cognitiveService: CognitiveService) { }
+    constructor(private cognitiveService: CognitiveService, private azureToolkitService: AzureToolkitService) { }
 
     search(searchTerm: string) {
         if (!searchTerm) return;
@@ -37,6 +41,7 @@ export class SearchComponent {
 
     analyze(imageResult: ImageResult) {
         this.currentItem = imageResult;
+        this.currentItemSaved = false;
         this.currentAnalytics = null;
         if (this.faceRectangles) this.faceRectangles.nativeElement.innerHTML = "";
         this.isAnalyzing = true;
@@ -63,6 +68,22 @@ export class SearchComponent {
         });
 
         window.scroll(0, 0);
+    }
+
+    saveImage(): void {
+        if(this.currentItem == null) return;
+        this.isSavingImage = true;
+
+        let transferObject: ImagePostRequest = {
+            url: this.currentItem.thumbnailUrl,
+            encodingFormat: this.currentItem.encodingFormat,
+            id: this.currentItem.imageId
+        }
+        debugger;
+        this.azureToolkitService.saveImage(transferObject).subscribe(saveSuccessfull => {
+            this.isSavingImage = false;
+            this.currentItemSaved = saveSuccessfull;
+        });
     }
 
     drawFace(face: FaceResponse): any {
