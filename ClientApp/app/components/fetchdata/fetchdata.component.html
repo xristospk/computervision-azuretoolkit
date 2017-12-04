@@ -1,24 +1,57 @@
-<h1>Weather forecast</h1>
+<h1>CoinMarket</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<table>
+    <tr>
+      <th>Estimated current value</th>
+      <th>{{assetsValue | number}} €</th>
+    </tr>
+    <tr>
+      <td>Invested value</td>
+      <td><input [(ngModel)]="invested"> €</td>
+    </tr>
+    <tr>
+      <td>+/-</td>
+      <td>{{ (assetsValue - invested) | number}} €</td>
+    </tr>
+</table>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
 
-<table class='table' *ngIf="forecasts">
+<p *ngIf="!coins">
+    <em>Loading...</em>
+</p>
+
+<table class='table' *ngIf="coins">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>€</th>
+            <th>Amount</th>
+            <th>Value €</th>
+            <th>$</th>
+            <th>BTC</th>
+            <th>Δ 1h</th>
+            <th>Δ 24h</th>
+            <th>Δ 7d</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.dateFormatted }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
+        <tr *ngFor="let coin of coins">
+            <td style="text-align: right">{{ coin.rank }}</td>
+            <td>{{ coin.name }}</td>
+            <td>{{ coin.symbol }}</td>
+            <td style="text-align: right">{{ coin.price_eur | number }}</td>
+            <td style="text-align: right">{{ coin.amount }}</td>
+            <td style="text-align: right">{{ coin.value | number }}</td>
+            <td style="text-align: right">{{ coin.price_usd | number }}</td>
+            <td style="text-align: right">{{ coin.price_btc }}</td>
+            <td style="text-align: right" [ngClass]="{'plus': coin.percent_change_1h > 0, 
+                'minus': coin.percent_change_1h < 0}">{{ coin.percent_change_1h }}</td>
+            <td style="text-align: right" [ngClass]="{'plus': coin.percent_change_24h > 0, 
+                    'minus': coin.percent_change_24h < 0}">{{ coin.percent_change_24h }}</td>
+            <td style="text-align: right" [ngClass]="{'plus': coin.percent_change_7d > 0, 
+                        'minus': coin.percent_change_7d < 0}">{{ coin.percent_change_7d }}</td>
         </tr>
     </tbody>
 </table>
