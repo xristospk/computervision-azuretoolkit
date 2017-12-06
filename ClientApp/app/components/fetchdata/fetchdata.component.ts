@@ -16,6 +16,7 @@ export class FetchDataComponent implements OnInit {
 
     invested:number = 3675;
     assetsValue: number = 0;
+    assetsBTCValue: number = 0;
 
     assets: { [symbol: string]: number; } = {
         "BTC": 0.27823447,
@@ -45,6 +46,7 @@ export class FetchDataComponent implements OnInit {
                     var assetValue = assetAmount * coin.price_eur;
                     coin.value = assetValue;
                     this.assetsValue += assetValue;
+                    this.assetsBTCValue += assetAmount * coin.price_btc;
                 }
             });
             this.coins = response;
