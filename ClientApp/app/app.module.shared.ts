@@ -12,6 +12,7 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 
 import { AppCommonModule } from './common/common.module';
 import { SearchComponent } from './components/search/search.component';
+import { FetchDataDonaComponent } from './components/fetchdatadona/fetchdatadona.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { SearchComponent } from './components/search/search.component';
         NavMenuComponent,
         SearchComponent,
         FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        FetchDataDonaComponent
     ],
     imports: [
         CommonModule,
@@ -30,6 +32,7 @@ import { SearchComponent } from './components/search/search.component';
             { path: 'home', component: HomeComponent },
             { path: 'search', component: SearchComponent },
             { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'fetch-data-dona', component: FetchDataDonaComponent },
             { path: '**', redirectTo: 'home' }
         ]),
         AppCommonModule

@@ -6,29 +6,21 @@ import { Asset } from '../../common/models/asset';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
-    selector: 'fetchdata',
-    templateUrl: './fetchdata.component.html',
-    styleUrls: ['./fetchdata.component.css']
+    selector: 'fetchdatadona',
+    templateUrl: './fetchdatadona.component.html',
+    styleUrls: ['./fetchdatadona.component.css']
 })
-export class FetchDataComponent implements OnInit {
+export class FetchDataDonaComponent implements OnInit {
 
     public coins: Array<Coin>;
 
-    invested:number = 3675;
+    invested:number = 300;
     assetsValue: number = 0;
     assetsBTCValue: number = 0;
 
     assets: { [symbol: string]: number; } = {
-        "BTC": 0.26322947,
-        // "ETH": 1.69308715,
-        "LTC": 12.36369744,
-        "XMR": 10,
-        "XLM": 2527.08061242,
-        "BTG": 0.41557555,
-        "SALT": 298.27136517,
-        "KMD": 569.74092816,
-        "DGB": 6926.40980769,
-        "XRP": 500,
+        "BTC": 0.0150015,
+        "KMD": 60,
     };
 
     constructor(private cmcService: CmcService) {}
