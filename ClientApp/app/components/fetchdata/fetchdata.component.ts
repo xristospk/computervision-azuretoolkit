@@ -18,14 +18,14 @@ export class FetchDataComponent implements OnInit {
     assetsValue: number = 0;
 
     assets: { [symbol: string]: number; } = {
-        "BTC": 0.27858452,
-        "ETH": 1.69308715,
+        "BTC": 0.27823447,
+        // "ETH": 1.69308715,
         "LTC": 12.36369744,
         "XMR": 10,
         "XLM": 2527.08061242,
         "BTG": 0.41557555,
-        "SALT": 237.38810584,
-        "KMD": 512.77551065,
+        "SALT": 298.27136517,
+        "KMD": 629.74092816,
         "DGB": 6926.40980769,
         "XRP": 500,
     };
