@@ -4,6 +4,7 @@ import { CmcService } from '../../common/services/cmc.service';
 import { Coin } from '../../common/models/coin';
 import { Asset } from '../../common/models/asset';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+// import { asEnumerable } from 'linq-es2015';
 
 @Component({
     selector: 'fetchdata',
@@ -11,6 +12,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
     styleUrls: ['./fetchdata.component.css']
 })
 export class FetchDataComponent implements OnInit {
+    hideZeroValues: boolean = false;
 
     public coins: Array<Coin>;
 
@@ -33,20 +35,22 @@ export class FetchDataComponent implements OnInit {
 
     constructor(private cmcService: CmcService) {}
 
+    hideZeroChanged(event: any) {
+        debugger;
+        this.hideZeroValues = event.target.checked;
+    }
+
     ngOnInit(): void {
-        // debugger;
         this.cmcService.getCoins().subscribe(response => {
             response.forEach(coin => {
-                // coin.price_eur = parseInt(coin.price_eur.toFixed(2));
-                // coin.price_usd = parseInt(coin.price_usd.toFixed(2));
 
                 var assetAmount = this.assets[coin.symbol];
                 if (assetAmount) {
                     coin.amount = assetAmount;
-                    var assetValue = assetAmount * coin.price_eur;
-                    coin.value = assetValue;
-                    this.assetsValue += assetValue;
+                    this.assetsValue += assetAmount * coin.price_eur;
                     this.assetsBTCValue += assetAmount * coin.price_btc;
+                } else {
+                    coin.amount = 0;
                 }
             });
             this.coins = response;

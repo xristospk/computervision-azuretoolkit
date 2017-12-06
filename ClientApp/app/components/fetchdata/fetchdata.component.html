@@ -19,6 +19,7 @@
     </tr>
 </table>
 
+<input type="checkbox" (change)="hideZeroChanged($event)"> Hide zero values
 
 <p *ngIf="!coins">
     <em>Loading...</em>
@@ -26,36 +27,38 @@
 
 <table class='table' *ngIf="coins">
     <thead>
-        <tr>
-            <th>Rank</th>
+        <tr class="grid-header">
+            <th class="number">Rank</th>
             <th>Name</th>
             <th>Symbol</th>
-            <th>€</th>
-            <th>Amount</th>
-            <th>Value €</th>
-            <th>$</th>
-            <th>BTC</th>
-            <th>Δ 1h</th>
-            <th>Δ 24h</th>
-            <th>Δ 7d</th>
+            <th class="number">€</th>
+            <th class="number">Amount</th>
+            <th class="number">Value €</th>
+            <th class="number">BTC</th>
+            <th class="number">Value BTC</th>
+            <th class="number">$</th>
+            <th class="number">Δ 1h</th>
+            <th class="number">Δ 24h</th>
+            <th class="number">Δ 7d</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let coin of coins">
-            <td style="text-align: right">{{ coin.rank }}</td>
-            <td>{{ coin.name }}</td>
-            <td>{{ coin.symbol }}</td>
-            <td style="text-align: right">{{ coin.price_eur | number }}</td>
-            <td style="text-align: right">{{ coin.amount }}</td>
-            <td style="text-align: right">{{ coin.value | number }}</td>
-            <td style="text-align: right">{{ coin.price_usd | number }}</td>
-            <td style="text-align: right">{{ coin.price_btc }}</td>
-            <td style="text-align: right" [ngClass]="{'plus': coin.percent_change_1h > 0, 
-                'minus': coin.percent_change_1h < 0}">{{ coin.percent_change_1h }}</td>
-            <td style="text-align: right" [ngClass]="{'plus': coin.percent_change_24h > 0, 
-                    'minus': coin.percent_change_24h < 0}">{{ coin.percent_change_24h }}</td>
-            <td style="text-align: right" [ngClass]="{'plus': coin.percent_change_7d > 0, 
-                        'minus': coin.percent_change_7d < 0}">{{ coin.percent_change_7d }}</td>
+    <tbody *ngFor="let coin of coins" >
+        <tr *ngIf="coin.amount > 0 || !hideZeroValues">
+            <td id="rank" class="number">{{ coin.rank }}</td>
+            <td id="name">{{ coin.name }}</td>
+            <td id="symbol">{{ coin.symbol }}</td>
+            <td id="price_eur" class="number">{{ coin.price_eur | number }}</td>
+            <td id="amount" class="number">{{ coin.amount }}</td>
+            <td id="value_eur" class="number">{{ coin.amount*coin.price_eur | number }}</td>
+            <td id="price_btc" class="number">{{ coin.price_btc }}</td>
+            <td id="value_btc" class="number">{{ coin.amount*coin.price_btc }}</td>
+            <td id="price_usd" class="number">{{ coin.price_usd | number }}</td>
+            <td id="percent_change_1h" class="number" 
+                [ngClass]="{'plus': coin.percent_change_1h > 0, 'minus': coin.percent_change_1h < 0}">{{ coin.percent_change_1h }}</td>
+            <td id="percent_change_24h" class="number" 
+                [ngClass]="{'plus': coin.percent_change_24h > 0, 'minus': coin.percent_change_24h < 0}">{{ coin.percent_change_24h }}</td>
+            <td id="percent_change_7d" class="number" 
+                [ngClass]="{'plus': coin.percent_change_7d > 0, 'minus': coin.percent_change_7d < 0}">{{ coin.percent_change_7d }}</td>
         </tr>
     </tbody>
 </table>

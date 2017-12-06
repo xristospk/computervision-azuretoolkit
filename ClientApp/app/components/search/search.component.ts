@@ -6,13 +6,16 @@ import { ComputerVisionRequest, ComputerVisionResponse, FaceResponse } from '../
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Element } from '@angular/compiler';
 import { ImagePostRequest } from '../../common/models/imagePostRequest';
+import { UserService } from '../../common/services/user.service';
+import { User } from '../../common/models/user';
 
 @Component({
     selector: 'search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.css']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
+    user: User;
 
     searchResults: ImageResult[] | null;
     isSearching = false;
@@ -26,7 +29,11 @@ export class SearchComponent {
     @ViewChild('image') image: any;
     @ViewChild('faceRectangles') faceRectangles: any;
 
-    constructor(private cognitiveService: CognitiveService, private azureToolkitService: AzureToolkitService) { }
+    constructor(private userService: UserService, private cognitiveService: CognitiveService, private azureToolkitService: AzureToolkitService) { }
+
+    ngOnInit(): void {
+        this.userService.getUser().subscribe(user => this.user = user);
+    }
 
     search(searchTerm: string) {
         if (!searchTerm) return;
@@ -71,15 +78,18 @@ export class SearchComponent {
     }
 
     saveImage(): void {
-        if(this.currentItem == null) return;
+        if(this.currentItem == null || this.currentAnalytics == null) return;
         this.isSavingImage = true;
 
         let transferObject: ImagePostRequest = {
             url: this.currentItem.thumbnailUrl,
             encodingFormat: this.currentItem.encodingFormat,
-            id: this.currentItem.imageId
+            id: this.currentItem.imageId,
+            description: this.currentAnalytics.description.captions[0].text,
+            tags: this.currentAnalytics.tags.map(tag => tag.name),
+            userId: this.user.userId
         }
-        debugger;
+        
         this.azureToolkitService.saveImage(transferObject).subscribe(saveSuccessfull => {
             this.isSavingImage = false;
             this.currentItemSaved = saveSuccessfull;

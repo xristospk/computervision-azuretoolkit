@@ -5,3 +5,11 @@
 .minus {
     color: #d9534f;
 }
+
+.number {
+    text-align: right;
+}
+
+.grid-header > th {
+    cursor: pointer;
+}

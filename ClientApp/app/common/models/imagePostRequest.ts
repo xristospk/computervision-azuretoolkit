@@ -1,5 +1,8 @@
 export interface ImagePostRequest {
-    url: string, 
-    id: string,
-    encodingFormat: string
+    userId: string;
+    description: string;
+    tags: string[];
+    url: string;
+    id: string;
+    encodingFormat: string;
 }
