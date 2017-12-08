@@ -16,27 +16,26 @@ export class FetchDataComponent implements OnInit {
 
     public coins: Array<Coin>;
 
-    invested:number = 3675;
+    invested:number = 2601;
     assetsValue: number = 0;
     assetsBTCValue: number = 0;
 
     assets: { [symbol: string]: number; } = {
-        "BTC": 0.26322947,
+        "BTC": 0.09987176,
         // "ETH": 1.69308715,
-        "LTC": 12.36369744,
-        "XMR": 10,
-        "XLM": 2527.08061242,
+        "LTC": 10,
+        // "XMR": 10.00000000,
+        "XLM": 1527.08061242,
         "BTG": 0.41557555,
-        "SALT": 298.27136517,
-        "KMD": 569.74092816,
-        "DGB": 6926.40980769,
-        "XRP": 500,
+        "SALT": 448.27136517,
+        "KMD": 1634.07924551,
+        "DGB": 8926.40980769,
+        "EMC2": 25
     };
 
     constructor(private cmcService: CmcService) {}
 
     hideZeroChanged(event: any) {
-        debugger;
         this.hideZeroValues = event.target.checked;
     }
 
