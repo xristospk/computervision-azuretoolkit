@@ -21,16 +21,21 @@ export class FetchDataComponent implements OnInit {
     assetsBTCValue: number = 0;
 
     assets: { [symbol: string]: number; } = {
-        "BTC": 0.09987176,
-        // "ETH": 1.69308715,
+        "EMC2": 175.00000000,
+        "BTC": -0.00494884,
         "LTC": 10,
-        // "XMR": 10.00000000,
-        "XLM": 1527.08061242,
+        "XLM": 400.62845000,
         "BTG": 0.41557555,
-        "SALT": 448.27136517,
-        "KMD": 1634.07924551,
+        "SALT": 511.26047071,
+        "KMD": 1690.98655546,
         "DGB": 8926.40980769,
-        "EMC2": 25
+        "XRP": 250,
+        "XVG": 3300,
+        "SNT": 846,
+        "ADA": 300,
+        "NXT": 85,
+        "SC": 5652,
+        "XEM": 106
     };
 
     constructor(private cmcService: CmcService) {}
