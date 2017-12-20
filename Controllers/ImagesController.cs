@@ -16,7 +16,7 @@ namespace AzureToolkit.Controllers {
 
         public ImagesController(AzureToolkitContext context) {
             this._context = context;
-            var credentials = new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials("azuretkstoragepk", "EtOISefALqnWedlP9edo39oKUSaLkuQrS7YvlWmkYV64ZFrRkcB2q6vPa5Kqmbr2T8Por6VYbk1WPYgy1eHRkQ==");
+            var credentials = new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials("atkstoragepk", "Qd8l2eFnhvlP6Kta8mLvogwXbz3rg9w7D9Vlrkbnx5VN+iQ5wwPmdhk5NjO9+ihBPfJ+igg2v8BL+slv0FhDfA==");
             var storageAccount = new CloudStorageAccount(credentials, true);
 
             var blobClient = storageAccount.CreateCloudBlobClient();
@@ -25,27 +25,34 @@ namespace AzureToolkit.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> PostImage([FromBody] ImagePostRequest request) {
-            CloudBlockBlob blockBlob = _container.GetBlockBlobReference($"{request.Id}.{request.EncodingFormat}");
-            HttpWebRequest aRequest = (HttpWebRequest) WebRequest.Create(request.URL);
-            HttpWebResponse aResponse = (await aRequest.GetResponseAsync()) as HttpWebResponse;
 
-            var stream = aResponse.GetResponseStream();
-            await blockBlob.UploadFromStreamAsync(stream);
-            stream.Dispose();
+            try {
+                CloudBlockBlob blockBlob = _container.GetBlockBlobReference($"{request.Id}.{request.EncodingFormat}");
+                HttpWebRequest aRequest = (HttpWebRequest) WebRequest.Create(request.URL);
+                HttpWebResponse aResponse = (await aRequest.GetResponseAsync()) as HttpWebResponse;
 
-            var savedImage = new SavedImage() {
-                StorageUrl = blockBlob.Uri.ToString(),
-                UserId = request.UserId,
-                Description = request.Description,
-                Tags = new List<SavedImageTag>()
-            };
+                var stream = aResponse.GetResponseStream();
+                await blockBlob.UploadFromStreamAsync(stream);
+                stream.Dispose();
 
-            request.Tags.ForEach(tag => savedImage.Tags.Add(new SavedImageTag() { Tag = tag }));
-            
-            _context.Add(savedImage);
-            _context.SaveChanges();
-            
-            return Ok();
+                var savedImage = new SavedImage() {
+                    StorageUrl = blockBlob.Uri.ToString(),
+                    UserId = request.UserId,
+                    Description = request.Description,
+                    Tags = new List<SavedImageTag>(),
+                    Faces = request.Faces
+                };
+
+                request.Tags.ForEach(tag => savedImage.Tags.Add(new SavedImageTag() { Tag = tag }));
+
+                _context.Add(savedImage);
+                _context.SaveChanges();
+
+                return Ok();
+            } catch (Exception e) {
+                return BadRequest(e);
+            }
+
         }
     }
 
@@ -53,6 +60,7 @@ namespace AzureToolkit.Controllers {
         public string UserId { get; set; }
         public string Description { get; set; }
         public List<string> Tags { get; set; }
+        public List<SavedFace> Faces { get; set; }
         public string URL { get; set; }
         public string Id { get; set; }
         public string EncodingFormat { get; set; }

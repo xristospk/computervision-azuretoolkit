@@ -11,9 +11,10 @@ using System;
 namespace AzureToolkit.Migrations
 {
     [DbContext(typeof(AzureToolkitContext))]
-    partial class AzureToolkitContextModelSnapshot : ModelSnapshot
+    [Migration("20171219140550_AddedSavedFaces")]
+    partial class AddedSavedFaces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

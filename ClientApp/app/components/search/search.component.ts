@@ -81,13 +81,15 @@ export class SearchComponent implements OnInit {
         if(this.currentItem == null || this.currentAnalytics == null) return;
         this.isSavingImage = true;
 
+        debugger;
         let transferObject: ImagePostRequest = {
             url: this.currentItem.thumbnailUrl,
             encodingFormat: this.currentItem.encodingFormat,
             id: this.currentItem.imageId,
             description: this.currentAnalytics.description.captions[0].text,
             tags: this.currentAnalytics.tags.map(tag => tag.name),
-            userId: this.user.userId
+            userId: this.user.userId,
+            faces: this.currentAnalytics.faces
         }
         
         this.azureToolkitService.saveImage(transferObject).subscribe(saveSuccessfull => {

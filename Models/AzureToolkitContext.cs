@@ -10,5 +10,8 @@ namespace AzureToolkit.Models
 
         public DbSet<SavedImageTag> SavedImageTags {get; set;}
         
+        public DbSet<SavedFace> SavedFaces  {get; set;}
+
+        public DbSet<SavedFaceRectangle> SavedFaceRectangles  {get; set;}
     }
 }

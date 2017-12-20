@@ -11,10 +11,10 @@ import { ComputerVisionResponse, ComputerVisionRequest } from '../models/compute
 export class CognitiveService {
     
     bingSearchApiUrl = "https://api.cognitive.microsoft.com/bing/v7.0";
-    bingSearchApiKey = "6e12cec1f636483aa20bd5bbb1704b85";
+    bingSearchApiKey = "d2f3214b4fd6455dac6c9da0c495b57d";
 
     computerVisionApiUrl = "https://westeurope.api.cognitive.microsoft.com/vision/v1.0";
-    computerVisionApiKey = "c5c5ec539eee40aea0e7040cc77865d6";
+    computerVisionApiKey = "ec7b57e4c38b4255a55585e70cdb42c9";
 
     constructor(private http: AzureHttpClient) { }
 
