@@ -13,6 +13,8 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { AppCommonModule } from './common/common.module';
 import { SearchComponent } from './components/search/search.component';
 import { FetchDataDonaComponent } from './components/fetchdatadona/fetchdatadona.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+
 
 @NgModule({
     declarations: [
@@ -21,7 +23,8 @@ import { FetchDataDonaComponent } from './components/fetchdatadona/fetchdatadona
         SearchComponent,
         FetchDataComponent,
         HomeComponent,
-        FetchDataDonaComponent
+        FetchDataDonaComponent,
+        GalleryComponent
     ],
     imports: [
         CommonModule,
@@ -33,10 +36,12 @@ import { FetchDataDonaComponent } from './components/fetchdatadona/fetchdatadona
             { path: 'search', component: SearchComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'fetch-data-dona', component: FetchDataDonaComponent },
+            { path: 'gallery', component: GalleryComponent },
             { path: '**', redirectTo: 'home' }
         ]),
         AppCommonModule
     ]
 })
 export class AppModuleShared {
+
 }

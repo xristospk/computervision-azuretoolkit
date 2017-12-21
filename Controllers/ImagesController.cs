@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AzureToolkit.Models;
@@ -53,6 +54,17 @@ namespace AzureToolkit.Controllers {
                 return BadRequest(e);
             }
 
+        }
+
+        [HttpGet("{userId}")]
+        public IActionResult GetImages(string userID) {
+            try {
+                var images = _context.SavedImages.Where(image => image.UserId == userID).ToList();
+                return Ok(images);
+            } catch (Exception e) {
+                Console.WriteLine(e);
+                return BadRequest(e);
+            }
         }
     }
 

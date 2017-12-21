@@ -1,0 +1,23 @@
+<h1>Gallery</h1>
+
+<div class="results" *ngIf="savedImages">
+    <div *ngFor="let savedImage of savedImages" class="card">
+        <img src="{{savedImage.storageUrl}}" />
+        <div>
+            <h4><b>{{savedImage.description}}</b></h4>
+            <div>
+                <span class="tag label" 
+                [ngClass]="{'label-success': tag.confidence >= 75, 
+                            'label-warning': tag.confidence >=5 && tag.confidence < 75,
+                            'label-danger': tag.confidence < 5}"
+                *ngFor="let tag of savedImage?.tags">
+                <span class="confidence">{{tag.confidence}}%</span>
+                {{tag.name}}  
+            </span>
+            </div>
+        </div>
+        <div *ngIf="!savedImages">
+            <h4>No images to display</h4>
+        </div>
+    </div>
+</div>
