@@ -29,6 +29,14 @@ export class AzureToolkitService {
             .catch(this.handleError);
     }
 
+    public searchImages(userId: string, searchTerm: string): Observable<SavedImage[]> {
+        return this.http.get(`${this.originUrl}api/images/${userId}/${searchTerm}`)
+        .map(images => {
+            return images.json() as SavedImage[];
+        })
+        .catch(this.handleError);       
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

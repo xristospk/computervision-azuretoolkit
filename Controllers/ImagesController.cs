@@ -5,6 +5,8 @@ using System.Net;
 using System.Threading.Tasks;
 using AzureToolkit.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Search;
+using Microsoft.Azure.Search.Models;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
@@ -56,10 +58,30 @@ namespace AzureToolkit.Controllers {
 
         }
 
-        [HttpGet("{userId}")]
-        public IActionResult GetImages(string userID) {
+        [HttpGet("search/{userId}/{term}")]
+        public IActionResult SearchImages(string userId, string term) {
             try {
-                var images = _context.SavedImages.Where(image => image.UserId == userID).ToList();
+
+                string searchServiceName = "pk-azuretoolkit";
+                string queryApiKey = "2FE3C4A63242DB7AEC2CC343B037ABB2";
+                var indexClient = new SearchIndexClient(searchServiceName, "description", new SearchCredentials(queryApiKey));
+
+                var parameters = new SearchParameters() { Filter = $"UserId eq '{userId}'" };
+                DocumentSearchResult<SavedImage> result = indexClient.Documents.Search<SavedImage>(term, parameters);
+                var images = result.Results.Select(savedImage => savedImage.Document);
+
+                return Ok(images);
+
+            } catch (Exception e) {
+                Console.WriteLine(e);
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet("{userId}")]
+        public IActionResult GetImages(string userId) {
+            try {
+                var images = _context.SavedImages.Where(image => image.UserId == userId);
                 return Ok(images);
             } catch (Exception e) {
                 Console.WriteLine(e);

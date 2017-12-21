@@ -12,8 +12,9 @@ import { SavedImage } from '../../common/models/savedImage';
 export class GalleryComponent implements OnInit {
     user: User;
 
-    savedImages: SavedImage[] | null = null;
-    
+    savedImages: SavedImage[] | null;
+    searchResults: SavedImage[] | null;
+
     constructor(private userService: UserService, private azureToolkitService: AzureToolkitService) { }
 
     ngOnInit(): void {
@@ -30,5 +31,14 @@ export class GalleryComponent implements OnInit {
 
 
         }  );
+    }
+
+    search(searchTerm: string): void {
+        this.searchResults = null;
+
+        this.azureToolkitService.searchImages(this.user.userId, searchTerm).subscribe(searchResult => {
+            console.log(searchResult);
+            this.searchResults = searchResult;
+        });
     }
 }

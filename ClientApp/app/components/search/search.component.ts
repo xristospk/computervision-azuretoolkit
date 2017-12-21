@@ -81,7 +81,6 @@ export class SearchComponent implements OnInit {
         if(this.currentItem == null || this.currentAnalytics == null) return;
         this.isSavingImage = true;
 
-        debugger;
         let transferObject: ImagePostRequest = {
             url: this.currentItem.thumbnailUrl,
             encodingFormat: this.currentItem.encodingFormat,
