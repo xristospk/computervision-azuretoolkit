@@ -1,59 +1,27 @@
-li .glyphicon {
-    margin-right: 10px;
+.navbar-inverse {
+    background-image: url(https://designnavigator.daimler.com/img/template/dbdn_bg_1920.jpg);
+    border-radius: 0;
+
 }
 
-/* Highlighting rules for nav menu items */
-li.link-active a,
-li.link-active a:hover,
-li.link-active a:focus {
-    background-color: #4189C7;
+.navbar-brand > img {
+    height: 20px;
+    width: auto;
+    margin-top: 10px;
+}
+
+.navbar-brand {
+    line-height: 43px;
+    color: #eee !important;
+}
+
+.navbar-inverse {
     color: white;
 }
 
-/* Keep the nav menu independent of scrolling and on top of other items */
-.main-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-}
-
-@media (min-width: 768px) {
-    /* On small screens, convert the nav menu to a vertical sidebar */
-    .main-nav {
-        height: 100%;
-        width: calc(25% - 20px);
-    }
-    .navbar {
-        border-radius: 0px;
-        border-width: 0px;
-        height: 100%;
-    }
-    .navbar-header {
-        float: none;
-    }
-    .navbar-collapse {
-        border-top: 1px solid #444;
-        padding: 0px;
-    }
-    .navbar ul {
-        float: none;
-    }
-    .navbar li {
-        float: none;
-        font-size: 15px;
-        margin: 6px;
-    }
-    .navbar li a {
-        padding: 10px 16px;
-        border-radius: 4px;
-    }
-    .navbar a {
-        /* If a menu item's text is too long, truncate it */
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+li.link-active a,
+li.link-active a:hover,
+li.link-active a:focus
+li.link-active a:focus {
+    color: white;
 }

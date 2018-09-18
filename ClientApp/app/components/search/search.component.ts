@@ -15,13 +15,13 @@ import { User } from '../../common/models/user';
     styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-    user: User;
+    user: User | null = null;
 
-    searchResults: ImageResult[] | null;
+    searchResults: ImageResult[] | null = null;
     isSearching = false;
 
-    currentAnalytics: ComputerVisionResponse | null;
-    currentItem: ImageResult | null;
+    currentAnalytics: ComputerVisionResponse | null  = null;;
+    currentItem: ImageResult | null  = null;;
     isAnalyzing: boolean = false;
     currentItemSaved: boolean = false;
     isSavingImage: boolean = false;
@@ -58,7 +58,6 @@ export class SearchComponent implements OnInit {
         }
 
         this.cognitiveService.analyzeImage(req).subscribe(result => {
-
             result.tags.forEach(tag => {
                 tag.confidence = Math.trunc(tag.confidence * 100);
             });
@@ -87,7 +86,7 @@ export class SearchComponent implements OnInit {
             id: this.currentItem.imageId,
             description: this.currentAnalytics.description.captions[0].text,
             tags: this.currentAnalytics.tags.map(tag => tag.name),
-            userId: this.user.userId,
+            userId: this.user ? this.user.userId : "",
             faces: this.currentAnalytics.faces
         }
         

@@ -13,7 +13,42 @@ export interface ComputerVisionResponse {
         name: string;
     }>;
     faces: Array<FaceResponse>;
+    color: {
+        dominantColors: Array<string>;
+    }
+    metadata: {
+        height: number;
+        width: number;
+        format: string;
+    }
+    imageType: {
+        clipArtType: boolean;
+        lineDrawingType: boolean;
+    }
+    adult: {
+        adultScore: number;
+        isAdultContent: boolean;
+        isRacyContent: boolean;
+        racyScore: number
+    }
+    categories: Array<CategoryResponse>;
 }
+
+export interface CategoryResponse {
+    name: string;
+    score: number;
+    detail: Array<{
+        celebrities: Array<{
+            confidence: number;
+            name: string;
+        }>
+        landmarks: Array<{
+            confidence: number;
+            name: string;
+        }>
+    }>
+}
+
 export interface FaceResponse {
     age: number,
     gender: string,

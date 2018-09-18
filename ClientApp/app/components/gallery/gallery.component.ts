@@ -10,32 +10,26 @@ import { SavedImage } from '../../common/models/savedImage';
     styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent implements OnInit {
-    user: User;
+    user: User | null = null;
 
-    savedImages: SavedImage[] | null;
-    searchResults: SavedImage[] | null;
+    savedImages: SavedImage[] | null = null;
+    searchResults: SavedImage[] | null = null;
 
     constructor(private userService: UserService, private azureToolkitService: AzureToolkitService) { }
 
     ngOnInit(): void {
-
-        debugger;
         this.userService.getUser().subscribe(user => {
-
-            this.user = user
-
+            this.user = user;
             this.azureToolkitService.getImages(user.userId).subscribe(images => {
                 console.log(images);
                 this.savedImages = images;
             });
-
-
-        }  );
+        });
     }
 
     search(searchTerm: string): void {
+        if(this.user == null) return;
         this.searchResults = null;
-
         this.azureToolkitService.searchImages(this.user.userId, searchTerm).subscribe(searchResult => {
             console.log(searchResult);
             this.searchResults = searchResult;

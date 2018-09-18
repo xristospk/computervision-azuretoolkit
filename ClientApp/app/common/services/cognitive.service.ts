@@ -29,7 +29,7 @@ export class CognitiveService {
 
     public analyzeImage(request: ComputerVisionRequest): Observable<ComputerVisionResponse> {
 
-        let url = this.computerVisionApiUrl + '/analyze?visualFeatures=Description,Tags,Faces';
+        let url = this.computerVisionApiUrl + '/analyze?visualFeatures=Description,Tags,Faces,Categories,ImageType,Color,Adult';
 
         return this.http.post(url, this.computerVisionApiKey, request)
             .map(r => r.json() as ComputerVisionResponse)

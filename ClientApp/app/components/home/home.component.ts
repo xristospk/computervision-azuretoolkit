@@ -10,7 +10,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class HomeComponent implements OnInit{
     
-    user: User;
+    user: User | null = null;
     
     ngOnInit(): void {
         this.userService.getUser().subscribe(user => {

@@ -6,13 +6,13 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
+// import { HomeComponent } from './components/home/home.component';
+// import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 
 
 import { AppCommonModule } from './common/common.module';
 import { SearchComponent } from './components/search/search.component';
-import { FetchDataDonaComponent } from './components/fetchdatadona/fetchdatadona.component';
+// import { FetchDataDonaComponent } from './components/fetchdatadona/fetchdatadona.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 
 
@@ -21,9 +21,9 @@ import { GalleryComponent } from './components/gallery/gallery.component';
         AppComponent,
         NavMenuComponent,
         SearchComponent,
-        FetchDataComponent,
-        HomeComponent,
-        FetchDataDonaComponent,
+        // FetchDataComponent,
+        // HomeComponent,
+        // FetchDataDonaComponent,
         GalleryComponent
     ],
     imports: [
@@ -31,11 +31,11 @@ import { GalleryComponent } from './components/gallery/gallery.component';
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
+            { path: '', redirectTo: 'search', pathMatch: 'full' },
+            // { path: 'home', component: HomeComponent },
             { path: 'search', component: SearchComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'fetch-data-dona', component: FetchDataDonaComponent },
+            // { path: 'fetch-data', component: FetchDataComponent },
+            // { path: 'fetch-data-dona', component: FetchDataDonaComponent },
             { path: 'gallery', component: GalleryComponent },
             { path: '**', redirectTo: 'home' }
         ]),

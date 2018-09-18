@@ -12,11 +12,14 @@
 <div *ngIf="searchResults">
     <h2><b>Selected Photo</b></h2>
     <div class="currentItem card" *ngIf="currentAnalytics || isAnalyzing">
-        <img src="{{currentItem?.thumbnailUrl}}" #image/>
+        <img src="{{currentItem?.thumbnailUrl}}" style="height: 100%" #image/>
         <div #faceRectangles></div>  
         <div *ngIf="!isAnalyzing">
             <h4><b>{{currentAnalytics?.description.captions[0].text}}</b></h4>
-            <div>
+            <div><b>Format:</b> '{{currentAnalytics?.metadata.format}}', Width: {{currentAnalytics?.metadata.width}}px, Height: {{currentAnalytics?.metadata.height}}px</div>
+            <div><b>Dominant colors:</b> <span *ngFor="let color of currentAnalytics?.color.dominantColors">'{{color}}'&nbsp;</span></div>
+            <div><b>is adult content:</b> {{currentAnalytics?.adult.isAdultContent}}, <b>is racy content:</b> {{currentAnalytics?.adult.isRacyContent}}, <b>is clip-art:</b> {{currentAnalytics?.imageType.clipArtType}}, <b>is line-drawing:</b> {{currentAnalytics?.imageType.lineDrawingType}}</div>
+            <div><b>Tags:</b>
                 <span class="tag label" 
                     [ngClass]="{'label-success': tag.confidence >= 75, 
                                 'label-warning': tag.confidence >=5 && tag.confidence < 75,
@@ -25,6 +28,15 @@
                     <span class="confidence">{{tag.confidence}}%</span>
                     {{tag.name}}  
                 </span>
+            </div>
+            <div><b>Categories:</b>
+                <div *ngIf="!currentAnalytics?.categories">no result</div>
+                <div *ngIf="currentAnalytics?.categories">
+                    <div *ngFor="let category of currentAnalytics?.categories">Name: '{{category.name}}', Score: {{category.score}}
+                        <div *ngFor="let landmark of category.detail?.landmarks">Landmark, Name: '{{landmark.name}}', Confidence: {{landmark.confidence}}</div>
+                        <div *ngFor="let celeb of category.detail?.celebrities">Celebrity, Name: '{{celeb.name}}', Confidence: {{celeb.confidence}}</div>
+                    </div>
+                </div>
             </div>
             <button *ngIf="!currentItemSaved && !isSavingImage" (click)="saveImage()">Save image</button>
             <span *ngIf="currentItemSaved">Image saved! :)</span>
