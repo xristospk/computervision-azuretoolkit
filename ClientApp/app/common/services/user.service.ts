@@ -9,7 +9,7 @@ import { User, AADUser } from '../models/user';
 @Injectable()
 export class UserService {
     private originUrl: string;
-    private aadUser: AADUser;
+    private aadUser: AADUser | null = null;
 
     private devUser: User = {
         givenname: "John",
