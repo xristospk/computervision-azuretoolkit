@@ -37,7 +37,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
             // { path: 'fetch-data', component: FetchDataComponent },
             // { path: 'fetch-data-dona', component: FetchDataDonaComponent },
             { path: 'gallery', component: GalleryComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: '**', redirectTo: 'search' }
         ]),
         AppCommonModule
     ]
