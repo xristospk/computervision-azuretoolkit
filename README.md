@@ -8,7 +8,7 @@
 * Save personal pictures and corresponding analyzed results for logged in user  
 
 # SPA Technologie Stack  
-## (2017) State of the art Server Side SPA
+### (2017) State of the art Server Side SPA
 * ASP.NET Core 
 * Entitiy Framework Core ** Code First
 * Angular 2 + Karma Test Runner
