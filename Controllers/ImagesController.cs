@@ -19,7 +19,7 @@ namespace AzureToolkit.Controllers {
 
         public ImagesController(AzureToolkitContext context) {
             this._context = context;
-            var credentials = new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials("atkstoragepk", "Qd8l2eFnhvlP6Kta8mLvogwXbz3rg9w7D9Vlrkbnx5VN+iQ5wwPmdhk5NjO9+ihBPfJ+igg2v8BL+slv0FhDfA==");
+            var credentials = new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials("{STORAGENAME}", "{STORAGEACCESSKEY}");
             var storageAccount = new CloudStorageAccount(credentials, true);
 
             var blobClient = storageAccount.CreateCloudBlobClient();
@@ -63,7 +63,7 @@ namespace AzureToolkit.Controllers {
             try {
 
                 string searchServiceName = "pk-azuretoolkit";
-                string queryApiKey = "2FE3C4A63242DB7AEC2CC343B037ABB2";
+                string queryApiKey = "QUER_API_KEY";
                 var indexClient = new SearchIndexClient(searchServiceName, "description", new SearchCredentials(queryApiKey));
 
                 var parameters = new SearchParameters() { Filter = $"UserId eq '{userId}'" };
