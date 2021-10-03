@@ -48,7 +48,7 @@ https://cloudanalytics-vision.azurewebsites.net/search
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/26623619/135774215-477b06af-3223-44f1-8261-9f027ea00165.png" alt="drawing" width="500"/>
-
+<br>
 
   <img src="https://user-images.githubusercontent.com/26623619/135774169-57af47e8-235f-4be6-a48c-03837e63e8be.png" alt="drawing" width="500"/>
 </p>
