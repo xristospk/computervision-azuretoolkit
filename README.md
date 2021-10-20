@@ -60,9 +60,15 @@ https://cloudanalytics-vision.azurewebsites.net/search
 <p align="center">Rückgängig machen auf dem Mac - jedem dem Gag erklärt? Check. ☑️</p>
 
 
+<br>
+__Made with 🧠 by Cloud Analytics__<br>
+#mfgtss [@daimler_tss](https://www.instagram.com/daimler_tss/) <br>
+
 **Mit freundlichem Gruß / Kind Regards / #MFGTSS**
 
-<img src="https://user-images.githubusercontent.com/26623619/135774582-194d8c26-47de-455f-9746-98a06dd0e509.png" alt="drawing" width="20"/>  [Patrick Krybus](https://www.xing.com/profile/Patrick_Krybus)
+<img src="https://cdn.worldvectorlogo.com/logos/linktree-2.svg" alt="drawing" width="20"/>  [xristospk](https://www.linktr.ee/xristospk)
+
+<img src="https://user-images.githubusercontent.com/26623619/135774582-194d8c26-47de-455f-9746-98a06dd0e509.png" alt="drawing" width="20"/>  [Patrick Krybus](https://www.xing.com/profile/PatrickXristos_Krybus)
 
 <img src="https://user-images.githubusercontent.com/26623619/135774544-e9215840-e364-4386-b409-180c12ade8c3.png" alt="drawing" width="20"/>  [kbs.xrs](http://instagram.com/kbs.xrs/)
 
