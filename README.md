@@ -59,10 +59,9 @@ https://cloudanalytics-vision.azurewebsites.net/search
 </p>
 <p align="center">Rückgängig machen auf dem Mac - jedem dem Gag erklärt? Check. ☑️</p>
 
-
 <br>
-__Made with 🧠 by Cloud Analytics__<br>
-#mfgtss [@daimler_tss](https://www.instagram.com/daimler_tss/) <br>
+<br>
+Made with 🧠 by Cloud Analytics <br>
 
 **Mit freundlichem Gruß / Kind Regards / #MFGTSS**
 
